@@ -58,6 +58,19 @@ db.connect((err) => {
         });
     });
 
+    //  Question 3 ; GET METHOD
+    app.get('/data3', (req, res) => {
+        // Retrieve data from database
+        db.query('SELECT * FROM patients', (err, results) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error retrieving data');
+            } else {
+                // Render the data in a template
+                res.render('data', { results: results });
+            }
+        });
+    });   
 
 
 

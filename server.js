@@ -20,28 +20,47 @@ const db = mysql.createConnection({
 // Check connection
 db.connect((err) => {
     if (err) {
-        console.error("Error connecting to the database:", err); // Improved error logging
+        console.error("Error connecting to the database:", err);
         return;
     }
     console.log("Connected as id:", db.threadId);
 
     // Set up EJS as the view engine
     app.set('view engine', 'ejs');
-    app.set('views', __dirname + '/views'); // Corrected __dirname
+    app.set('views', __dirname + '/views');
 
-    // GET METHOD
+    //  Question 1 ; GET METHOD
     app.get('/data', (req, res) => {
         // Retrieve data from database
         db.query('SELECT * FROM patients', (err, results) => {
             if (err) {
                 console.log(err);
-                res.status(500).send('Error retrieving data'); // Corrected method to send status
+                res.status(500).send('Error retrieving data');
             } else {
                 // Render the data in a template
                 res.render('data', { results: results });
             }
         });
     });
+
+
+    //  Question 2 ; GET METHOD
+    app.get('/data2', (req, res) => {
+        // Retrieve data from database
+        db.query('SELECT * FROM providers', (err, results) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error retrieving data');
+            } else {
+                // Render the data in a template
+                res.render('data', { results: results });
+            }
+        });
+    });
+
+
+
+
 
     // Send message to browser
     app.listen(process.env.PORT, () => {

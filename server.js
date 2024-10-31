@@ -32,7 +32,7 @@ db.connect((err) => {
     // GET METHOD
     app.get('/data', (req, res) => {
         // Retrieve data from database
-        db.query('SELECT * FROM patient', (err, results) => {
+        db.query('SELECT * FROM patients', (err, results) => {
             if (err) {
                 console.log(err);
                 res.status(500).send('Error retrieving data'); // Corrected method to send status
